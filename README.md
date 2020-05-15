@@ -1,2 +1,3 @@
-# hashy
+# Hashy
+
 Hashtag Assistant
