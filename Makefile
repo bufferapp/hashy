@@ -14,10 +14,14 @@ push: build
 run:
 	docker run -it -p 80:80 --rm $(IMAGE_NAME)
 
+.PHONY: data
+data:
+	@bash scripts/get_dataset.sh
+
 .PHONY: train
 train:
-	docker run -it --rm $(IMAGE_NAME) python train_embedding.py
+	docker run -it -v $(PWD):/app --rm $(IMAGE_NAME) python train_embedding.py
 
 .PHONY: dev
 dev:
-	docker run -it -v $(PWD)/app:/app -p 80:80 --rm $(IMAGE_NAME)
+	docker run -it -v $(PWD):/app -p 80:80 --rm $(IMAGE_NAME) /bin/bash
