@@ -132,3 +132,6 @@ dmypy.json
 *.kv
 *.kv.vectors.npy
 *.ls
+
+# Data
+data/*
