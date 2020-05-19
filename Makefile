@@ -6,9 +6,6 @@ IMAGE_NAME := gcr.io/buffer-data/hashy:latest
 build:
 	docker build -t $(IMAGE_NAME) .
 
-.PHONY: push
-push: build
-	docker push $(IMAGE_NAME)
 
 .PHONY: run
 run: build
@@ -25,3 +22,11 @@ train:
 .PHONY: dev
 dev:
 	docker run -it -v $(PWD):/app -p 80:80 --rm $(IMAGE_NAME) /bin/bash
+
+.PHONY: push
+push: build
+	docker push $(IMAGE_NAME)
+
+.PHONY: deploy
+deploy: push
+	gcloud run deploy hashy --image $(IMAGE_NAME) --platform managed --region us-central1
