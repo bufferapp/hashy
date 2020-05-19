@@ -11,7 +11,7 @@ push: build
 	docker push $(IMAGE_NAME)
 
 .PHONY: run
-run:
+run: build
 	docker run -it -p 80:80 --rm $(IMAGE_NAME)
 
 .PHONY: data

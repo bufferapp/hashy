@@ -5,7 +5,6 @@ RUN pip install --no-cache-dir spacy gensim
 RUN python -m spacy download en_core_web_sm
 
 # Gunicorn configuration
-ENV MAX_WORKERS 2
-ENV WEB_CONCURRENCY 2
+ENV MAX_WORKERS 5
 
 COPY ./app /app
