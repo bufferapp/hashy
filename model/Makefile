@@ -9,7 +9,7 @@ build:
 
 .PHONY: run
 run: build
-	docker run -it --rm $(IMAGE_NAME) bash scripts/train.sh "buffer-data.dbt_michael.predict_hashtags_posts"
+	docker run -it --rm $(GCLOUD_CONFIG_FLAG) $(IMAGE_NAME) bash scripts/train.sh "buffer-data.dbt_michael.predict_hashtags_posts"
 
 .PHONY: dev
 dev: build
