@@ -1,4 +1,4 @@
 trainingInput:
     scaleTier: BASIC
     runtimeVersion: "2.1"
-    pythonVersion: "3.7" # Note: Python 3 is also supported
+    pythonVersion: "3.7"

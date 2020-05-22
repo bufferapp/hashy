@@ -3,7 +3,7 @@ trainingInput:
     runtimeVersion: "2.1"
     pythonVersion: "3.7"
     hyperparameters:
-        goal: MAXIMIZE
+        goal: MINIMIZE
         maxTrials: 20
         maxParallelTrials: 5
         hyperparameterMetricTag: loss
