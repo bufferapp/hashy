@@ -33,9 +33,10 @@ MODEL_NAME=$2
 VERSION_NAME=$3
 
 REGION=us-central1
-FRAMEWORK=SCIKIT_LEARN
-RUN_TIME=2.1
+FRAMEWORK=scikit-learn
+RUN_TIME=1.15
 PYTHON_VERSION=3.7
+STAGING_DIR="gs://buffer-temp"
 
 if gcloud ai-platform models list | grep "$MODEL_NAME" &> /dev/null
 then
@@ -55,6 +56,7 @@ else
     gcloud ai-platform versions create "$VERSION_NAME" \
     --model "$MODEL_NAME" \
     --origin "$MODEL_DIR" \
+    --staging-bucket "$STAGING_DIR" \
     --framework "$FRAMEWORK" \
     --runtime-version="$RUN_TIME" \
     --python-version="$PYTHON_VERSION"
