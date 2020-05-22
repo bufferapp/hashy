@@ -4,26 +4,18 @@ trainingInput:
     pythonVersion: "3.7"
     hyperparameters:
         goal: MAXIMIZE
-        maxTrials: 30
+        maxTrials: 20
         maxParallelTrials: 5
-        hyperparameterMetricTag: my_metric_tag
+        hyperparameterMetricTag: loss
         enableTrialEarlyStopping: TRUE
         params:
-            - parameterName: n_estimator
+            - parameterName: size
               type: INTEGER
               minValue: 5
               maxValue: 100
               scaleType: UNIT_LINEAR_SCALE
-            - parameterName: max_depth
+            - parameterName: window
               type: INTEGER
-              minValue: 20
-              maxValue: 200
+              minValue: 5
+              maxValue: 100
               scaleType: UNIT_LINEAR_SCALE
-            - parameterName: min_samples_leaf
-              type: INTEGER
-              minValue: 1
-              maxValue: 200
-              scaleType: UNIT_LINEAR_SCALE
-            - parameterName: criterion
-              type: CATEGORICAL
-              categoricalValues: ["gini", "entropy"]

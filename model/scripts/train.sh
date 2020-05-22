@@ -46,7 +46,7 @@ if [[ ! "$RUN_TYPE" =~ ^(train|hptuning)$ ]]; then
 fi
 
 NOW="$(date +"%Y%m%d_%H%M%S")"
-JOB_PREFIX="sklearn_template"
+JOB_PREFIX="hashy"
 
 JOB_NAME="${JOB_PREFIX}_${RUN_TYPE}_${NOW}"
 JOB_DIR="gs://buffer-temp/models/$JOB_NAME"
