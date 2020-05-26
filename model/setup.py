@@ -6,10 +6,11 @@ import setuptools
 
 
 REQUIRED_PACKAGES = [
-    "scikit-learn",
-    "pandas-gbq",
+    "scikit-learn==0.20.4",
+    "pandas==0.24.2",
+    "pandas-gbq==0.13.2",
     "cloudml-hypertune",
-    "gensim",
+    "gensim==3.8.3",
 ]
 
 setuptools.setup(
