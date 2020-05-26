@@ -18,4 +18,3 @@ dev: build
 .PHONY: push
 push: build
 	docker push $(IMAGE_NAME)
-
