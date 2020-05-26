@@ -9,7 +9,8 @@ import hypertune
 import pandas as pd
 import numpy as np
 from sklearn import model_selection
-import joblib
+from sklearn.pipeline import Pipeline
+from sklearn.externals import joblib
 
 from trainer.model import Word2VecEstimator
 
@@ -20,11 +21,11 @@ BASE_QUERY = """
 select
   hashtags
 from `{table}`
-limit 100000
+limit 1000000
 """
 
 
-def read_df_from_bigquery(full_table_path, project_id=None, num_samples=1000000):
+def read_df_from_bigquery(full_table_path, project_id=None, num_samples=None):
     """Read data from BigQuery and split into train and validation sets.
 
     Args:
@@ -38,13 +39,10 @@ def read_df_from_bigquery(full_table_path, project_id=None, num_samples=1000000)
     """
 
     query = BASE_QUERY.format(table=full_table_path)
-    limit = " LIMIT {}".format(num_samples) if num_samples else ""
+    limit = "limit {}".format(num_samples) if num_samples else ""
     query += limit
 
     data_df = pd.read_gbq(query, project_id=project_id, dialect="standard")
-    data_df.to_csv("data.csv", index=False)
-
-    # data_df = pd.read_csv("data.csv")
 
     return data_df
 
@@ -89,7 +87,7 @@ def dump_object(object_to_dump, output_path):
         None
     """
 
-    with open("model.dump", "wb") as wf:
+    with open(output_path, "wb") as wf:
         joblib.dump(object_to_dump, wf)
 
 
@@ -141,8 +139,11 @@ def run_experiment(flags):
     # Get model
     estimator = Word2VecEstimator(flags)
 
+    # Create pipeline
+    pipeline = Pipeline([("word2vec", estimator)])
+
     # Run training and evaluation
-    _train_and_evaluate(estimator, dataset, flags.job_dir)
+    _train_and_evaluate(pipeline, dataset, flags.job_dir)
 
 
 def parse_args(argv):
@@ -180,7 +181,7 @@ def parse_args(argv):
     )
 
     parser.add_argument(
-        "--dim", help="Dimensionality of the word vectors.", default=10, type=int,
+        "--size", help="Dimensionality of the word vectors.", default=10, type=int,
     )
 
     parser.add_argument(
