@@ -36,7 +36,12 @@ REGION=us-central1
 FRAMEWORK=scikit-learn
 RUN_TIME=1.15
 PYTHON_VERSION=3.7
-STAGING_DIR="gs://buffer-temp"
+STAGING_BUCKET="gs://buffer-temp"
+PACKAGE_URI="gs://buffer-temp/models/hashy/hashy-0.1.0.tar.gz"
+
+python setup.py sdist --formats=gztar
+
+gsutil cp ./dist/hashy-0.1.0.tar.gz "$PACKAGE_URI"
 
 if gcloud ai-platform models list | grep "$MODEL_NAME" &> /dev/null
 then
@@ -53,11 +58,14 @@ then
    echo "Version already exists."
 else
     # 2. Create version
-    gcloud ai-platform versions create "$VERSION_NAME" \
+    gcloud --quiet beta ai-platform versions create "$VERSION_NAME" \
     --model "$MODEL_NAME" \
     --origin "$MODEL_DIR" \
-    --staging-bucket "$STAGING_DIR" \
-    --framework "$FRAMEWORK" \
+    --staging-bucket "$STAGING_BUCKET" \
     --runtime-version="$RUN_TIME" \
-    --python-version="$PYTHON_VERSION"
+    --python-version="$PYTHON_VERSION" \
+    --framework "$FRAMEWORK" \
+    --package-uris "$PACKAGE_URI"
 fi
+
+# echo "#lunch" | gcloud ai-platform predict --model hashy --version v0 --text-instances -
