@@ -128,10 +128,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Embeddings
+# Embeddings and dumps
 *.kv
 *.kv.vectors.npy
-*.ls
+*.joblib
 
 # Data
 data/*
