@@ -183,7 +183,7 @@ def parse_args(argv):
     parser.add_argument(
         "--vector_size",
         help="Dimensionality of the word vectors.",
-        default=50,
+        default=100,
         type=int,
     )
 
@@ -197,7 +197,18 @@ def parse_args(argv):
     parser.add_argument(
         "--min_count",
         help="The minimum number of samples required to be included in vocabulary.",
-        default=10,
+        default=5,
+        type=int,
+    )
+
+    parser.add_argument(
+        "--workers", help="Worker threads to train the model.", default=3, type=int,
+    )
+
+    parser.add_argument(
+        "--iterations",
+        help="Number of iterations (epochs) over the corpus.",
+        default=5,
         type=int,
     )
 

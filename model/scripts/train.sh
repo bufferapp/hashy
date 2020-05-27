@@ -49,7 +49,7 @@ NOW="$(date +"%Y%m%d_%H%M%S")"
 JOB_PREFIX="hashy"
 
 JOB_NAME="${JOB_PREFIX}_${RUN_TYPE}_${NOW}"
-JOB_DIR="gs://buffer-temp/"
+JOB_DIR="."
 PACKAGE_PATH=trainer
 MAIN_TRAINER_MODULE=$PACKAGE_PATH.task
 REGION=us-central1

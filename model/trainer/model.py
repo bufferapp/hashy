@@ -4,11 +4,21 @@ from gensim.models import Word2Vec
 
 
 class Word2VecEstimator(BaseEstimator):
-    def __init__(self, vector_size=50, window=5, min_count=10, compute_loss=True):
+    def __init__(
+        self,
+        vector_size=100,
+        window=5,
+        min_count=5,
+        workers=3,
+        iterations=5,
+        compute_loss=True,
+    ):
         self.vector_size = vector_size
         self.window = window
         self.min_count = min_count
         self.compute_loss = compute_loss
+        self.workers = workers
+        self.iterations = iterations
         self.loss = None
 
     def fit(self, X, y=None):
@@ -18,6 +28,8 @@ class Word2VecEstimator(BaseEstimator):
             size=self.vector_size,
             window=self.window,
             min_count=self.min_count,
+            workers=self.workers,
+            iter=self.iterations,
             compute_loss=self.compute_loss,
         )
 
