@@ -49,7 +49,7 @@ NOW="$(date +"%Y%m%d_%H%M%S")"
 JOB_PREFIX="hashy"
 
 JOB_NAME="${JOB_PREFIX}_${RUN_TYPE}_${NOW}"
-JOB_DIR="."
+JOB_DIR="gs://buffer-temp/"
 PACKAGE_PATH=trainer
 MAIN_TRAINER_MODULE=$PACKAGE_PATH.task
 REGION=us-central1
@@ -66,6 +66,7 @@ if [ "$RUN_ENV" = 'remote' ]; then
   RUN_ENV_ARGS="jobs submit training $JOB_NAME \
     --region $REGION \
     --config $CONFIG_FILE \
+    --stream-logs \
     "
 else  # assume `local`
   RUN_ENV_ARGS="local train"
