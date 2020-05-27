@@ -137,7 +137,7 @@ def run_experiment(flags):
     dataset = read_df_from_bigquery(flags.input, num_samples=flags.num_samples)
 
     # Get model
-    estimator = Word2VecEstimator(flags)
+    estimator = Word2VecEstimator(flags.vector_size, flags.window, flags.min_count)
 
     # Create pipeline
     pipeline = Pipeline([("word2vec", estimator)])
@@ -181,13 +181,16 @@ def parse_args(argv):
     )
 
     parser.add_argument(
-        "--size", help="Dimensionality of the word vectors.", default=10, type=int,
+        "--vector_size",
+        help="Dimensionality of the word vectors.",
+        default=50,
+        type=int,
     )
 
     parser.add_argument(
         "--window",
         help="Maximum distance between the current and predicted word within a sentence.",
-        default=10,
+        default=5,
         type=int,
     )
 
@@ -203,7 +206,6 @@ def parse_args(argv):
 
 def main():
     """Entry point."""
-
     flags = parse_args(sys.argv[1:])
     logging.basicConfig(level=flags.log_level.upper())
     run_experiment(flags)

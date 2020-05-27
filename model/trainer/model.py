@@ -4,8 +4,8 @@ from gensim.models import Word2Vec
 
 
 class Word2VecEstimator(BaseEstimator):
-    def __init__(self, size=50, window=5, min_count=10, compute_loss=True):
-        self.size = size
+    def __init__(self, vector_size=50, window=5, min_count=10, compute_loss=True):
+        self.vector_size = vector_size
         self.window = window
         self.min_count = min_count
         self.compute_loss = compute_loss
@@ -15,7 +15,7 @@ class Word2VecEstimator(BaseEstimator):
 
         self.model = Word2Vec(
             sentences=X,
-            size=self.size,
+            size=self.vector_size,
             window=self.window,
             min_count=self.min_count,
             compute_loss=self.compute_loss,
