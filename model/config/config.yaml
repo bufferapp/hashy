@@ -1,0 +1,4 @@
+trainingInput:
+    scaleTier: BASIC
+    runtimeVersion: "1.15"
+    pythonVersion: "3.7"
