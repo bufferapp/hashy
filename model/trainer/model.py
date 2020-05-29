@@ -24,7 +24,7 @@ class Word2VecEstimator(BaseEstimator):
     def fit(self, X, y=None):
 
         self.model = Word2Vec(
-            sentences=X,
+            corpus_file=X,
             size=self.vector_size,
             window=self.window,
             min_count=self.min_count,
