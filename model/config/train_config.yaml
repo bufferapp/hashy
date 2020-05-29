@@ -1,4 +1,5 @@
 trainingInput:
-    scaleTier: BASIC
+    scaleTier: CUSTOM
+    masterType: n1-highcpu-16
     runtimeVersion: "1.15"
     pythonVersion: "3.7"
