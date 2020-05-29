@@ -31,7 +31,7 @@ def dump_object(object_to_dump, output_path):
     if not tf.io.gfile.exists(output_path):
         tf.io.gfile.makedirs(os.path.dirname(output_path))
     with tf.io.gfile.GFile(output_path, "w") as wf:
-        joblib.dump(object_to_dump, wf)
+        joblib.dump(object_to_dump, wf, compress=True)
 
 
 def _train_and_evaluate(estimator, dataset_path, output_dir):
