@@ -65,7 +65,8 @@ else
     --runtime-version="$RUN_TIME" \
     --python-version="$PYTHON_VERSION" \
     --framework "$FRAMEWORK" \
-    --package-uris "$PACKAGE_URI"
+    --machine-type mls1-c4-m2 \
+    --package-uris="$PACKAGE_URI"
 fi
 
-# echo "#lunch" | gcloud ai-platform predict --model hashy --version v0 --text-instances -
+# echo "#lunch" | gcloud ai-platform predict --model hashy --version beta --text-instances -
