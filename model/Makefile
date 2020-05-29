@@ -7,9 +7,13 @@ GCLOUD_CONFIG_FLAG = -v $(HOME)/.config/gcloud/:/root/.config/gcloud
 build:
 	docker build -t $(IMAGE_NAME) .
 
+.PHONY: data
+data:
+	@bash scripts/get_dataset.sh
+
 .PHONY: run
 run: build
-	docker run -it --rm $(GCLOUD_CONFIG_FLAG) $(IMAGE_NAME) bash scripts/train.sh "buffer-data.dbt_michael.predict_hashtags_posts"
+	docker run -it --rm $(GCLOUD_CONFIG_FLAG) $(IMAGE_NAME) bash scripts/train.sh data/updates_hashtags.csv
 
 .PHONY: dev
 dev: build
